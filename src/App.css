@@ -6,3 +6,8 @@
 .bck{
   background-color: rgba(107, 241, 5, 0.564) !important;
 }
+
+.per{
+  border:  2px solid red !important;
+  transition: all .3s;
+}

@@ -32,9 +32,22 @@ function App() {
 			toast.error('Please choose any of includes..');
 		}
 	};
-	let copyPass = () => {
-		navigator.clipboard.writeText(Password);
-		toast.success('Password Copyid');
+	let copyPass = (e) => {
+		if (Password !== '') {
+			navigator.clipboard.writeText(Password);
+			toast.success('Password Copyid');
+		} else {
+			let display = e.target.previousSibling;
+			display.classList.add('per');
+			display.value = '!..empty password';
+
+			setTimeout(() => {
+				e.target.previousSibling.classList.remove('per');
+				display.value = '';
+			}, 1000);
+
+			toast.error('First generate password');
+		}
 	};
 
 	return (
@@ -45,7 +58,10 @@ function App() {
 					<h4 className='fw-bold text-center py-4'>Generate Random Password</h4>
 					<div className='d-flex'>
 						<input value={Password} readOnly className='form-control' />
-						<button className='btn btn-info fw-bold' onClick={copyPass}>
+						<button
+							id='display'
+							className='btn btn-info fw-bold'
+							onClick={(e) => copyPass(e)}>
 							Copy
 						</button>
 					</div>
